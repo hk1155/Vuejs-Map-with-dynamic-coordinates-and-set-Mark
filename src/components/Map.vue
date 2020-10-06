@@ -2,7 +2,7 @@
   <div>
     <h4>Map is set according to this coordinates</h4>
     <p>{{ coordinates.lat }} Latitude, {{ coordinates.lng }} Longtitude</p>
-    <hr />
+    <hr/>
     <!-- <h4>Custom Coordinates</h4>
         <p>{{dclat}} Latitude, {{dclat}} Longtitude</p><hr> -->
     <input type="number" v-model="cust.clat" placeholder="latitude" />
@@ -12,7 +12,7 @@
     <hr />
     <!-- <button @click="addMarker">Add Mark</button> -->
     <button v-on:click="addMarker" >Add Mark</button>
-    <button v-on:click="removeMark" v-if="show">Remove Mark</button>
+    <button v-on:click="removeMark" v-if="show">Remove Mark</button><hr>
     <GmapMap
       :id="mymap"
       :center="coordinates"
@@ -61,7 +61,6 @@ export default {
     //     this.coordinates=coordinates;
     // })
     // .catch(error=>alert(error));
-
     this.coordinates.lat = 10;
     this.coordinates.lng = 10;
 
