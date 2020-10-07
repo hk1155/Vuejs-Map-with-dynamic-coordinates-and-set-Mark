@@ -2,27 +2,22 @@
   <div id="app" class="container">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div class="row">
-      <div class="col-4">
-       
-      </div>
-
-      <div class="col-8">
-        <Map/>
-      </div>
+      <!-- <Map /> -->
+      <Map2/>
     </div>
-      
   </div>
 </template>
 
 <script>
-
-import Map from './components/Map.vue'
+// import Map from "./components/Map.vue";
+import Map2 from "./components/Map2.vue"
 export default {
-  name: 'App',
+  name: "App",
   components: {
-     Map
-  }
-}
+    // Map,
+    Map2
+  },
+};
 </script>
 
 <style>
