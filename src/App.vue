@@ -2,20 +2,24 @@
   <div id="app" class="container">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div class="row">
-      <Map />
-      <!-- <Map2/> -->
+      <Map/>
+      <!-- <NewMap/> -->
+      <!-- <Map2 :latitude= 13.7013266 :longitude= -89.226622 :title="'Location from Map'" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import Map from "./components/Map.vue";
-// import Map2 from "./components/Map2.vue"
+// import NewMap from './components/NewMap.vue'
+// import Map2 from './components/Map2.vue'
 export default {
   name: "App",
   components: {
     Map,
+    // NewMap,
     // Map2
+    
   },
 };
 </script>

@@ -3,8 +3,8 @@
     <h4>Map is set according to this coordinates</h4>
     <p>{{ coordinates.lat }} Latitude, {{ coordinates.lng }} Longtitude</p>
     <hr />
-    <!-- <h4>Custom Coordinates</h4>
-        <p>{{dclat}} Latitude, {{dclat}} Longtitude</p><hr> -->
+    <h4 v-if="showcust">Custom Coordinates</h4>
+    <p>{{this.cust.clat}} Latitude, {{this.cust.clng}} Longtitude</p><hr>
     <input
       type="number"
       v-model="cust.clat"
@@ -57,11 +57,11 @@ export default {
   data() {
     return {
       errmsg: null,
+      showcust:false,
       show: false,
       showerr: false,
       addshow: true,
-      dclat: null,
-      dclng: null,
+     
       markers: [],
       currentPlace: null,
 
@@ -76,22 +76,32 @@ export default {
     };
   },
   mounted() {
-    //it finds the current location
+   // it finds the current location
 
     // this.$getLocation({})
     //     .then(coordinates =>{
 
     //         this.coordinates=coordinates;
     //     })
-    //     .catch(error=>alert(error));
+    //     .catch(error=>alert(error))
+    if(this.cust.lat!=null && this.cust.lng!=null)
+    {
+      
+      this.coordinates.lat=20;
+      this.coordinates.lng=20;
+    }
+    else{
 
-     this.coordinates.lat = 10;
-     this.coordinates.lng = 10;
+      this.coordinates.lat =10;
+      this.coordinates.lng = 10;
+
+    }
+  
+     
   },
   methods: {
     addMarker() {
-      this.show = true;
-      this.addshow = false;
+     
 
       if(this.coordinates.lat==null || this.coordinates.lng==null)
       {
@@ -100,6 +110,8 @@ export default {
       }
       else
       {
+        this.show = true;
+        this.addshow = false;
         const marker = {
         lat: this.coordinates.lat,
         lng: this.coordinates.lng,
@@ -108,6 +120,7 @@ export default {
       this.places.push(this.coordinates);
       this.center = marker;
       this.currentPlace = null;
+
       }
      
     },
@@ -118,13 +131,12 @@ export default {
     },
 
     getData() {
-      // this.dclat=this.cust.clat
-      // this.dclng=this.cust.clng
-
+      
       if (this.cust.clat == null || this.cust.clng == null) {
         this.showerr = true;
         this.errmsg = "Please fill the data";
       } else {
+        this.showcust=true
         this.showerr=false
         this.coordinates.lat = this.cust.clat;
         this.coordinates.lng = this.cust.clng;
