@@ -2,7 +2,7 @@
   <div>
     <h4>Map is set according to this coordinates</h4>
     <p>{{ coordinates.lat }} Latitude, {{ coordinates.lng }} Longtitude</p>
-    <hr />
+    <hr/>
     <h4 v-if="showcust">Custom Coordinates</h4>
     <p>{{this.cust.clat}} Latitude, {{this.cust.clng}} Longtitude</p><hr>
     <input
@@ -16,7 +16,7 @@
       v-model="cust.clng"
       placeholder="longtitude"
       class="form-control"
-    /><br />
+    /><br/>
     <button v-on:click="getData(data)" class="btn btn-primary">
       Set New Data
     </button>
@@ -32,7 +32,6 @@
     </button>
     <hr />
     <GmapMap
-      :id="mymap"
       :center="coordinates"
       :zoom="7"
       map-type-id="terrain"
@@ -63,7 +62,7 @@ export default {
       addshow: true,
      
       markers: [],
-      currentPlace: null,
+      // currentPlace: null,
 
       coordinates: {
         lat: null,
@@ -91,19 +90,15 @@ export default {
       this.coordinates.lng=20;
     }
     else{
-
-      this.coordinates.lat =10;
-      this.coordinates.lng = 10;
-
+      this.coordinates.lat =12;
+      this.coordinates.lng = 15;
     }
-  
      
   },
   methods: {
     addMarker() {
      
-
-      if(this.coordinates.lat==null || this.coordinates.lng==null)
+     if(this.coordinates.lat==null || this.coordinates.lng==null)
       {
         this.showerr=true
         this.errmsg="Coordinates not Found"
@@ -120,7 +115,6 @@ export default {
       this.places.push(this.coordinates);
       this.center = marker;
       this.currentPlace = null;
-
       }
      
     },
@@ -136,6 +130,8 @@ export default {
         this.showerr = true;
         this.errmsg = "Please fill the data";
       } else {
+        this.show=false
+        this.addshow=true
         this.showcust=true
         this.showerr=false
         this.coordinates.lat = this.cust.clat;
