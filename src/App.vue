@@ -7,7 +7,7 @@
     <div class="row">
 
       <!-- <Map/> -->
-      <!-- <NewMap/> -->
+      <!-- <Try/> -->
       <Map2/>
     </div>
   </div>
@@ -15,13 +15,13 @@
 
 <script>
 //import Map from "./components/Map.vue";
-// import NewMap from './components/NewMap.vue'
- import Map2 from './components/Map2.vue'
+// import Try from "./components/Try.vue"
+import Map2 from './components/Map2.vue'
 export default {
   name: "App",
   components: {
     // Map,
-    // NewMap,
+    // Try,
     Map2
     
   },

@@ -1,25 +1,41 @@
 <template>
   <div>
-    
-    <input type="number" v-model="txtlat" placeholder="Latitude" />
-    <input type="number" v-on:keypress.enter="addmarker()" v-model="txtlng" placeholder="Longitude" />
-    <button @click="addmarker()" v-if="showadd">Add Mark</button>
-    <button @click="removemark()" v-if="showremove">Remove Mark</button>
-
+    <input
+      type="number"
+      v-model="txtlat"
+      placeholder="Latitude"
+      class="form-control"
+      
+    />
+   
+    <input
+      type="number"
+      v-model="txtlng"
+      class="form-control"
+      placeholder="Longitude"
+      
+    /><br />
+    <button @click="addmarker()" class="btn btn-primary" v-if="showadd">
+      Add Mark
+    </button>
+    <button @click="removemark()" class="btn btn-danger" v-if="showremove">
+      Remove Mark
+    </button>
     <p style="color: red" v-if="errmsg">{{ errmsg }}</p>
     <hr />
     <gmap-map
       ref="mymap"
-      :center="startLocation"
-      :zoom="5"
-      style="width: 100%; height: 300px"
+      :center=startLocation
+      :zoom="2"
+      style="width: 800px; height: 500px"
     >
+          
       <gmap-marker
         v-for="(item, key) in coordinates"
         :key="key"
-        :zoom="5"
         :position="getPosition(item)"
         :clickable="true"
+        
         @click="toggleInfo(item, key)"
       />
     </gmap-map>
@@ -28,29 +44,30 @@
 </template>
 
 <script>
+
 export default {
   name: "Map2",
+ 
   data() {
     return {
       errmsg: false,
-    
       showadd: true,
       showremove: false,
       txtlat: null,
-      txtlng:null,
+      txtlng: null,
 
       startLocation: {
-        //this display the simple map where started
-        // lat: 9.436911823156148,
-        // lng: 8.382812499999996
-        lat: 10,
-        lng: 10,
+        
+        lat: null,
+        lng: null,
+      
       },
       coordinates: [
         //set the mark coordinates
         {
-          lat: null,
-          lng: null,
+          
+          lat: Number,
+          lng: Number,
         },
       ],
       infoPosition: null,
@@ -66,13 +83,21 @@ export default {
       },
     };
   },
+  mounted() {
+    this.$getLocation({})
+      .then((coordinates) => {
+        this.startLocation = coordinates;
+      })
+      .catch((error) => alert(error));
+
+  },
   methods: {
     getPosition: function (marker) {
       return {
         lat: parseFloat(marker.lat),
         lng: parseFloat(marker.lng),
       };
-    },
+    },   
     // toggleInfo: function (marker, key) {
     //   this.infoPosition = this.getPosition(marker);
     //   this.infoContent = marker.full_name;
@@ -84,14 +109,14 @@ export default {
     //   }
     // },
     addmarker: function () {
-      
-      if (this.txtlat != null || this.txtlng != null) {
+
+      if (this.txtlat != null && this.txtlng != null) {
         this.errmsg = false;
         this.coordinates.push({
           lat: this.txtlat,
           lng: this.txtlng,
         });
-        
+
         this.startLocation.lat = this.txtlat;
         this.startLocation.lng = this.txtlng;
         this.showadd = false;
