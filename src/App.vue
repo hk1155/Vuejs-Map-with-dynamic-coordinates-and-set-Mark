@@ -12,7 +12,6 @@
     </div>
   </div>
 </template>
-
 <script>
 //import Map from "./components/Map.vue";
 // import Try from "./components/Try.vue"
@@ -22,8 +21,7 @@ export default {
   components: {
     // Map,
     // Try,
-    Map2
-    
+    Map2    
   },
 };
 </script>
